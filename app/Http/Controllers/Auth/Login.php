@@ -18,7 +18,7 @@ class Login extends Controller
         $user = User::where('email', strtolower($request->email))->with('tenantUser.role')->first();
         if (!$user) {
             throw new MessageExceptions([
-                'Credenciales invalidas!',
+                'Invalid Credentials!',
             ]);
 
         }
@@ -47,7 +47,7 @@ class Login extends Controller
         }
 
         throw new MessageExceptions([
-            'Credenciales invalidas!',
+            'Invalid Credentials!',
         ]);
     }
 }
