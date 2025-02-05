@@ -14,10 +14,10 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         Admin::create([
-            "name" => "Admin-Fausto",
-            "email" => "admin@cangoo.com",
+            "name" => "Admin",
+            "email" => "admin@clot.com",
             "phone" => "0995863247",
-            "password" => "mellamofausto",
+            "password" => "adminClot",
         ]);
     }
 }
