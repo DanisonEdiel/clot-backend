@@ -58,12 +58,6 @@ class Register extends Controller
                 'role_id' => 1,
             ]);
 
-            
-            $subscription = Plan::firstWhere('is_started', true);
-            CreateNewRuc::createSubscriptionAndTransactions($subscription ,$tenant);
-            CreateNewRuc::createConfig($tenant);
-
-
             $token = $user->createToken($user->name . '-AuthToken')->plainTextToken;
             DB::commit();
             return response()->json([

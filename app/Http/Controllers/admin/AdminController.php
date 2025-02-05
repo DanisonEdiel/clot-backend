@@ -31,11 +31,6 @@ class AdminController extends Controller
         return response()->json($this->repository->showCompany($tenantId));
     }
 
-    public function changePlan(DepositRequest $request)
-    {
-        return response()->json($this->repository->changePlan($request->getDepositFromRequest(), $request->file));
-    }
-
     public function addAdmin(Request $request){
         return response()->json($this->repository->addNewAdmin($request->email, $request->name, $request->adminId),200);
     }

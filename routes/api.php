@@ -3,9 +3,6 @@
 use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\Auth\Login;
 use App\Http\Controllers\Auth\Register;
-use App\Http\Controllers\ConfigController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Plans\PlanController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function () {
@@ -24,16 +21,6 @@ Route::prefix('account')->middleware([
     Route::put('update-password', [AccountController::class, 'updatePasswordAccount']);
 });
 
-Route::prefix('config')->middleware([
-    'authenticate'
-])->group(function () {
-    Route::get('show', [ConfigController::class, 'show']);
-    Route::put('update', [ConfigController::class, 'update']);
-});
-
-Route::get('dashboard', [DashboardController::class, 'getTenantInfo'])->middleware(
-    'authenticate'
-);
 
 Route::prefix('admin')->group(function () {
     Route::post('login', [\App\Http\Controllers\admin\AdminController::class, 'login']);
@@ -44,14 +31,5 @@ Route::prefix('admin')->group(function () {
             Route::get('company/{tenantId}', [\App\Http\Controllers\admin\AdminController::class, 'showCompany']);
             Route::post('change-plan', [\App\Http\Controllers\admin\AdminController::class, 'changePlan']);
             Route::post('add-user', [\App\Http\Controllers\admin\AdminController::class, 'addAdmin']);
-        });
-    Route::prefix('plan')
-        ->middleware('adminAuth')
-        ->group(function () {
-            Route::get('index', [PlanController::class, 'index']);
-            Route::get('{id}', [PlanController::class, 'show']);
-            Route::post('add', [PlanController::class, 'store']);
-            Route::put('update/{id}', [PlanController::class, 'update']);
-            Route::delete('delete/{id}', [PlanController::class, 'destroy']);
         });
 });
