@@ -4,7 +4,7 @@ FROM php:8.2-apache
 # Instala dependencias necesarias
 RUN apt-get update && apt-get install -y \
     libpq-dev \
-    && docker-php-ext-install pdo pdo_pgsql
+    && docker-php-ext-install pdo pdo_pgsql sockets gd bcmath
 
 # Copia el código de Laravel al contenedor
 COPY . /var/www/html
@@ -20,4 +20,4 @@ RUN composer install
 EXPOSE 8000
 
 # Inicia el servidor de Laravel
-CMD php artisan serve --host=0.0.0.0 --port=8000
+CMD php artisan serve
